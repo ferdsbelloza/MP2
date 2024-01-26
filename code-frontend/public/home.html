@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+      body {
+        padding-top: 56px; /* Adjust according to your navigation bar height */
+      }
+  
+      @media (min-width: 992px) {
+        body {
+          padding-top: 70px; /* Adjust according to your navigation bar height */
+        }
+      }
+    </style>
+    <script src="https://cdn.tiny.cloud/1/cdn81tg178n8pbyyb8sxoshsb3wj4246q37zu7k2hl0npuhg/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <style>
+      .mysampleClass {
+        background-color: yellow;
+        color: red;
+        font-size: 20px;
+      }
+    </style>
+
+  </head>
+
+<body>
+
+    
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">Your Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Header -->
+  <header class="container-fluid text-center mt-5">
+    <h1>Welcome to Your Website</h1>
+    <div id="result">No result yet</div>
+    <p>A short description of your website goes here.</p>
+
+    <textarea>
+      Welcome to TinyMCE!
+    </textarea>
+
+    <div id="div1">Sample Content Div 1 area</div>
+    <div id="div2">Sample Content Div 2 area<a></a></div>
+  </header>
+  
+  <!-- Main Content -->
+  <section class="container mt-4">
+    
+    <div class="row">
+      
+        <div class="col-md-10">
+        <h2>Main Content</h2>
+        <p id="main_p_content" ></p>
+
+        <input type="text" id="myTextField" value="">
+
+        <p>This is a sample paragraph</p>
+        <button id="buttonHide">Click to Hide</button> 
+        <button id="buttonShow">Click to Show</button>
+
+        <button id="buttonEffects">Click for Effects</button>
+
+        <br>
+        <button id="addText">Click to add text to all Paragraph</button>
+        <button id="tryCSSclass">CSS example1</button>
+    </div>
+
+    <div class="col-md-2">
+        <h2>Side Content</h2>
+        <p>Your side content goes here.</p>
+    </div>
+    
+  </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="container-fluid text-center mt-5">
+    <p>&copy; 2024 Your Website. All Rights Reserved.</p>
+  </footer>
+  
+  <!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+async function loadHomePageContent() {
+    const result = await fetch('http://localhost:5000/page-content/home'); //requesting
+    const data = await result.json();
+    document.getElementById('main_p_content').innerHTML = data;
+}
+
+loadHomePageContent();
+</script>
+
+<script>
+  $(document).ready(function(){
+      //coding area
+      //alert('My Jquery is working');
+      $("#myTextField").val("Hello World"); //setting a value in textfield
+      $("button").css("background-color", "yellow");
+      $("button").css("color", "blue");
+
+      $('#buttonHide').click(function() {
+        $("p").hide();
+        $("#div1").remove();
+        $("#div1").empty();
+      });
+
+      $('#buttonShow').click(function(){
+        $("p").show();
+      })
+
+      $('#buttonEffects').click(function(){
+        $("#div1").html("1"); //setting
+        $("#div2").html("2"); //setting
+
+        let num1 = $("#div1").html(); //getting
+        let num2 = $("#div2").html(); //getting
+
+        let x = parseInt(num1);
+        let y = parseInt(num2);
+
+        let sum = x + y;
+
+        $("#result").html(sum); //setting
+        $("#myTextField").val("");
+      });
+
+      $("#addText").click(function() {
+        let txt = $("#myTextField").val(); //getting
+        $("p").append(" " + txt); //append, prepend, after, before
+      });
+
+      $("#tryCSSclass").click(function() {
+        $("h1").addClass("mysampleClass");
+      });
+
+      
+  });
+
+
+  /* $(function() {
+    //coding area
+    alert('My Jquery is working');
+
+  })
+  */
+</script>
+
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script>
+
+</body>
+</html>

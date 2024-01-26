@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+</head>
+<body>
+    
+    <p> This is the contact us page </p>
+
+    <form>
+        <label for="fullName">Fullname</label> <br />
+        <input type="text" name="fullName" id="fullName" placeholder="Enter your Fullname"> <br />
+        <label for="Email">Email</label> <br />
+        <input type="email" name="Email" id="Email" placeholder="Enter your Email"> <br />
+        <label for="message">Message</label> <br />
+        <textarea name="message" id="message" placeholder="Send your Message"></textarea><br />
+
+        <br />        
+        <button type="button" id="formSend">Send</button>
+    </form>
+
+    <script>
+        document.getElementById('formSend').addEventListener('click', function () {
+            var fullName = document.getElementById('fullName').value;
+            var Email = document.getElementById('Email').value;
+            var message = document.getElementById('message').value;
+
+            var data = {
+                fullName: fullName,
+                Email: Email,
+                message: message
+            };
+
+            console.log(data);
+
+            fetch('http://localhost:5000/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 'success') {
+                    console.log('Success:', data);
+                    window.location.href = "http://localhost:3000/";
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
+</body>
+</html>
