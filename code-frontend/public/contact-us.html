@@ -3,57 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Submit Message</title>
 </head>
 <body>
-    
-    <p> This is the contact us page </p>
-
+    <div></div>
     <form>
-        <label for="fullName">Fullname</label> <br />
-        <input type="text" name="fullName" id="fullName" placeholder="Enter your Fullname"> <br />
-        <label for="Email">Email</label> <br />
-        <input type="email" name="Email" id="Email" placeholder="Enter your Email"> <br />
+        <label for="fullname">Fullname</label> <br />
+        <input type="text" name="fullname" id="fullname" placeholder="Enter your Fullname"> <br />
+        <label for="emailaddress">Email Address</label> <br />
+        <input type="email" name="emailaddress" id="emailaddress" placeholder="Enter your Email Address"> <br />
         <label for="message">Message</label> <br />
-        <textarea name="message" id="message" placeholder="Send your Message"></textarea><br />
-
-        <br />        
-        <button type="button" id="formSend">Send</button>
+        <textarea type="text" name="message" id="message" placeholder="Enter your Message"></textarea>
+        <button type="button" id="formSubmit">Submit Message</button>
     </form>
+    
+<script>
+    processMsg = (event) => {
+        event.preventDefault();
 
-    <script>
-        document.getElementById('formSend').addEventListener('click', function () {
-            var fullName = document.getElementById('fullName').value;
-            var Email = document.getElementById('Email').value;
-            var message = document.getElementById('message').value;
+        const webservice_api_url = 'http://localhost:5000/contact';
+        const fullname = document.getElementById('fullname').value;
+        const emailaddress = document.getElementById('emailaddress').value;
+        const message = document.getElementById('message').value;
 
-            var data = {
-                fullName: fullName,
-                Email: Email,
-                message: message
-            };
+ 
 
-            console.log(data);
+        const data = {
+            fullname: fullname,
+            emailaddress: emailaddress,
+            message: message,
+        }
 
-            fetch('http://localhost:5000/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        };
+
+        fetch(webservice_api_url, requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.code === 'success') {
                     console.log('Success:', data);
-                    window.location.href = "http://localhost:3000/";
                 }
             })
-            .catch((error) => {
-                console.error('Error:', error);
+            .catch(error => {
+                console.log(error);
             });
-        });
-    </script>
+    }
+
+    document.getElementById('formSubmit').addEventListener('click', processMsg);
+</script>
 
 </body>
 </html>
