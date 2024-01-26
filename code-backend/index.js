@@ -66,13 +66,13 @@ const profileDB = [
 
 const addRecord = [
     {
-        fullName: "Julie Ice",
-        Email: "julieice@gmail.com",
+        fullname: "Julie Ice",
+        emailaddress: "julieice@gmail.com",
         message: "Life is too short buy the damn shoes",
     },
     {
-        fullName: "Vic Santos",
-        Email: "vic@gmail.com",
+        fullname: "Vic Santos",
+        emailaddress: "vic@gmail.com",
         message: "Thank you for making learning an enjoyable experience",
     },
 ];
@@ -357,14 +357,14 @@ app.post('/add', (req, res)=>{
 })
 
 app.post('/contact', (req, res)=>{
-    const fullName = req.body.fullName;
-    const Email = req.body.Email;
+    const fullname = req.body.fullname;
+    const emailaddress = req.body.emailaddress;
     const message = req.body.message;
     
         // Add the new user to the database
         const newRecord = {
-            fullName: fullName,
-            Email: Email,
+            fullname: fullname,
+            emailaddress: emailaddress,
             message: message,
         }
 
