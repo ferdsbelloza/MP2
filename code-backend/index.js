@@ -66,14 +66,14 @@ const profileDB = [
 
 const addRecord = [
     {
-        fullname: "Julie Ice",
-        emailaddress: "julieice@gmail.com",
-        message: "Life is too short buy the damn shoes",
+        fullname: "Ferds Belloza",
+        emailaddress: "ferds@gmail.com",
+        message: "How to create a website using Reactjs?",
     },
     {
-        fullname: "Vic Santos",
-        emailaddress: "vic@gmail.com",
-        message: "Thank you for making learning an enjoyable experience",
+        fullname: "Kevin Corro",
+        emailaddress: "kevin@gmail.com",
+        message: "What are the topics in the bootcamp?",
     },
 ];
 
